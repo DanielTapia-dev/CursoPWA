@@ -25,7 +25,7 @@ module.exports.addSubscription = (suscripcion) => {
 module.exports.sendPush = (post) => {
     try {
         suscripciones.forEach((suscripcion, i) => {
-            webpush.sendNotification(suscripcion, post.titulo, []);
+            webpush.sendNotification(suscripcion, JSON.stringify(post), []);
         })
     } catch (error) {
         console.log("No se pudo");

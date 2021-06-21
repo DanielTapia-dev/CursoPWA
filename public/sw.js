@@ -128,10 +128,21 @@ self.addEventListener('sync', e => {
 
 //Escuchar PUSH
 self.addEventListener('push', e => {
-    console.log(e.data.text());
 
-    const title = e.data.text();
-    const options = {};
+    const data = JSON.parse(e.data.text());
+
+    console.log(data);
+
+    const title = data.titulo;
+    const options = {
+        body: data.cuerpo,
+        //icon: 'img/icons/icon-72x72.png'
+        icon: `img/avatars/${data.usuario}.jpg`,
+        badge: `img/favicon.ico`,
+        image: `https://datainfox.com/wp-content/uploads/2017/10/avengers-tower.jpg`,
+        vibrate: [500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500],
+        openUrl: '/'
+    };
 
     e.waitUntil(self.registration.showNotification(title, options));
 })
