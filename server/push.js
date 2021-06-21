@@ -23,7 +23,12 @@ module.exports.addSubscription = (suscripcion) => {
 };
 
 module.exports.sendPush = (post) => {
-    suscripciones.forEach((suscripcion, i) => {
-        webpush.sendNotification(suscripcion, post.titulo);
-    })
+    try {
+        suscripciones.forEach((suscripcion, i) => {
+            webpush.sendNotification(suscripcion, post.titulo, []);
+        })
+    } catch (error) {
+        console.log("No se pudo");
+    }
+
 };
